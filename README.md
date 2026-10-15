@@ -71,25 +71,13 @@ python tools/local_server.py
 
 ---
 
-## Containerized Deployment (Docker & Render)
+## Local Execution & Offline Operation
 
-This application is ready for containerized deployment on platforms such as **Render**, **Railway**, or **Google Cloud Run**.
+This application is strictly designed to execute locally on your Windows environment without external cloud dependencies:
 
-### Build and Run with Docker Locally
-```bash
-# Build the multi-runtime container image
-docker build -t ecommerce-analytics-r .
+- **Frontend**: Served locally from `web/` over `http://localhost:8001/` via the built-in HTTP daemon.
+- **API Orchestrator**: Python `tools/local_server.py` handles dataset routing, streaming uploads, and subprocess execution.
+- **Analytical Core**: High-performance R engine (R 4.6.1) executes data munging, RFM segmentation, Apriori association rules, and ARIMA forecasting natively on your machine.
+- **Data Privacy & Isolation**: All datasets (`data/` and `datasets/`), uploads, and analytical JSON outputs remain strictly on your local disk.
 
-# Run container on port 8001
-docker run -p 8001:10000 -e PORT=10000 ecommerce-analytics-r
-```
-
-### Deploy to Render
-1. Push this repository to GitHub: `https://github.com/Joshva2026/E-Commerce-Big-Data-Analytics-Using-R`
-2. Log in to your [Render Dashboard](https://dashboard.render.com/).
-3. Click **New +** $\to$ **Web Service**.
-4. Connect your GitHub repository `Joshva2026/E-Commerce-Big-Data-Analytics-Using-R`.
-5. Select **Docker** as the Runtime.
-6. Render will automatically detect [`Dockerfile`](Dockerfile) and [`render.yaml`](render.yaml).
-7. Click **Create Web Service**. Render will build the container, install R packages, pre-warm analytics, and launch the service.
 

@@ -1,7 +1,8 @@
 // ==============================================================================
-// web/js/config.js — Runtime Environment Configuration (Auto-Generated on Build)
+// web/js/config.js — Local Runtime Configuration
 // ==============================================================================
-// Configured API Base URL: (Empty - Local Same-Origin Fallback)
+// Strictly local same-origin API configuration.
+// All requests target the local Python analytical server at http://localhost:8001.
 // ==============================================================================
 
 window.__APP_CONFIG__ = {

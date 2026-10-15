@@ -5,10 +5,9 @@
 
 function initApp() {
 
-  // ── Unified API Base Resolution (Local & Production Compatible) ──
-  // 1. If configured via window.__APP_CONFIG__.API_BASE_URL (Vercel deployment pointing to Render), use it.
-  // 2. If loaded via file://, fallback to local server at http://127.0.0.1:8001.
-  // 3. Otherwise, use same-origin relative paths ('') which seamlessly works for local mode (localhost:8001).
+  // ── Unified API Base Resolution (Strictly Local Mode) ──
+  // Local mode uses same-origin relative paths ('') when served via http://localhost:8001
+  // or defaults to http://127.0.0.1:8001 if loaded directly via file://.
   const configuredApiBase = (window.__APP_CONFIG__ && window.__APP_CONFIG__.API_BASE_URL)
     ? String(window.__APP_CONFIG__.API_BASE_URL).trim().replace(/\/+$/, '')
     : '';
@@ -1886,22 +1885,16 @@ function initApp() {
   window.uploadUserDataset = uploadUserDataset;
   window.chartInstances = chartInstances;
 
-  // ── Initial Bootstrap ──────────────────────────────────────
+  // ── Initial Bootstrap (Local Execution) ────────────────────
   const portDisplay = document.getElementById('profile-port-display');
   if (portDisplay) {
-    if (configuredApiBase) {
-      portDisplay.textContent = 'Render Cloud';
-    } else if (window.location.protocol === 'file:') {
+    if (window.location.protocol === 'file:') {
       portDisplay.textContent = 'Port 8001 (Local)';
     } else if (window.location.port) {
-      portDisplay.textContent = `Port ${window.location.port}`;
+      portDisplay.textContent = `Port ${window.location.port} (Local)`;
     } else {
-      portDisplay.textContent = 'Active (HTTPS)';
+      portDisplay.textContent = 'Port 8001 (Local)';
     }
-  }
-
-  if (window.location.hostname.endsWith('vercel.app') && !configuredApiBase) {
-    showError('Vercel Setup Notice: API_BASE_URL is not set yet. Please set API_BASE_URL in your Vercel Project Settings to your deployed Render URL (e.g. https://<backend>.onrender.com).');
   }
 
   renderBuiltinCards();

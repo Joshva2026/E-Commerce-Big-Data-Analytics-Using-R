@@ -10,48 +10,39 @@ BIND = "0.0.0.0"
 DATA_DIR = os.path.join(os.getcwd(), "data")
 UPLOADED_FILE_PATH = os.path.join(DATA_DIR, "uploaded_dataset.csv")
 
-# Dynamic resolution of Rscript path for multi-platform (Windows & Linux/Docker/Render)
+# Dynamic discovery of Rscript executable for Windows and POSIX
 RSCRIPT_PATH = os.environ.get("RSCRIPT_PATH")
 if not RSCRIPT_PATH:
     which_r = shutil.which("Rscript")
     if which_r:
         RSCRIPT_PATH = which_r
-    elif os.path.exists(r"C:\Program Files\R\R-4.6.1\bin\Rscript.exe"):
-        RSCRIPT_PATH = r"C:\Program Files\R\R-4.6.1\bin\Rscript.exe"
     else:
-        RSCRIPT_PATH = "Rscript"
+        # Check standard Windows installation directories
+        candidates = [
+            r"C:\Program Files\R\R-4.6.1\bin\Rscript.exe",
+            r"C:\Program Files\R\R-4.6.0\bin\Rscript.exe",
+            r"C:\Program Files\R\R-4.5.0\bin\Rscript.exe",
+        ]
+        import glob
+        globbed = sorted(glob.glob(r"C:\Program Files\R\R-*\bin\Rscript.exe"), reverse=True)
+        candidates.extend(globbed)
+        for cand in candidates:
+            if os.path.exists(cand):
+                RSCRIPT_PATH = cand
+                break
+        if not RSCRIPT_PATH:
+            RSCRIPT_PATH = "Rscript"
 RUN_SCRIPT = "run_analysis.R"
 
-# Upload and timeout limits (production configurable via env vars)
+# Upload and timeout limits (configured for local big data processing)
 MAX_UPLOAD_SIZE_MB = int(os.environ.get("MAX_UPLOAD_SIZE_MB", 250))
 MAX_UPLOAD_BYTES = MAX_UPLOAD_SIZE_MB * 1024 * 1024
 R_TIMEOUT_SECONDS = int(os.environ.get("R_TIMEOUT_SECONDS", 300))
 
-# Allowed CORS Origins (supports comma-separated list and *.vercel.app wildcards)
-ALLOWED_ORIGINS_ENV = os.environ.get("ALLOWED_ORIGINS", "")
-ALLOWED_ORIGINS_LIST = [o.strip() for o in ALLOWED_ORIGINS_ENV.split(",") if o.strip()]
-
+# Local CORS Policy: Permit localhost, 127.0.0.1, same-origin, and file://
 def is_origin_allowed(origin):
-    if not origin:
+    if not origin or origin == "null" or "localhost" in origin or "127.0.0.1" in origin:
         return True
-    if not ALLOWED_ORIGINS_LIST:
-        return True
-    if origin == "null" or "localhost" in origin or "127.0.0.1" in origin:
-        return True
-    for allowed in ALLOWED_ORIGINS_LIST:
-        if allowed == "*" or allowed == origin:
-            return True
-        if allowed.startswith("*."):
-            suffix = allowed[1:]
-            clean_origin = origin.replace("https://", "").replace("http://", "").split(":")[0]
-            if clean_origin.endswith(suffix):
-                return True
-        elif allowed.startswith("https://*."):
-            domain_part = allowed[10:]
-            if origin.startswith("https://"):
-                host = origin[8:].split(":")[0]
-                if host.endswith("." + domain_part) or host == domain_part:
-                    return True
     return False
 
 # Ensure data dir exists
