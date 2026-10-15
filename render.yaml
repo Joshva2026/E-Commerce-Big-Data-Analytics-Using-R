@@ -1,0 +1,24 @@
+# ==============================================================================
+# render.yaml — Render Infrastructure as Code (Blueprint)
+# ==============================================================================
+
+services:
+  - type: web
+    name: ecommerce-bigdata-analytics-r
+    runtime: docker
+    repo: https://github.com/Joshva2026/E-Commerce-Big-Data-Analytics-Using-R
+    branch: main
+    plan: free
+    region: oregon
+    dockerfilePath: Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/status
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: ALLOWED_ORIGINS
+        value: "https://*.vercel.app,http://localhost:8001,http://127.0.0.1:8001"
+      - key: MAX_UPLOAD_SIZE_MB
+        value: "250"
+      - key: R_TIMEOUT_SECONDS
+        value: "300"

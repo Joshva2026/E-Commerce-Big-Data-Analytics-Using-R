@@ -1,0 +1,82 @@
+# ==============================================================================
+# .gitignore — E-Commerce Big Data Analytics Using R
+# ==============================================================================
+
+# Runtime Generated Analytics Output (produced by R pipeline)
+output/*.json
+output/*.tmp
+output/*.log
+output/server_debug.log
+!output/.gitkeep
+
+# Generated CSV Exports and Reports
+reports/full_data_cleaned.csv
+
+# Runtime User Uploads (dynamically handled by /api/upload)
+data/uploaded_dataset*
+data/temp_*
+
+# Python Bytecode and Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# R Workspace & History
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj.user
+
+# Local Scratch, Manual Test Fixtures & Temporary Scripts
+scratch/
+scratch_*
+create_multisheet.R
+custom_test_upload*
+scripts/test_*
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+[Dd]esktop.ini
+
+# IDE & Editor Configurations
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+
+# Secrets and Local Environment Variables
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.cert

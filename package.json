@@ -1,0 +1,13 @@
+{
+  "name": "ecommerce-bigdata-analytics-r",
+  "version": "1.0.0",
+  "private": true,
+  "description": "E-Commerce Big Data Analytics Using R — Stitch UI Presentation Layer",
+  "scripts": {
+    "build": "node scripts/inject_env.js",
+    "start": "python tools/local_server.py"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

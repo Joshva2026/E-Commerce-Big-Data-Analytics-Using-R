@@ -1,0 +1,56 @@
+---
+title: "E-Commerce Big Data Analytics Report"
+date: "`r Sys.Date()`"
+output: html_document
+params:
+  data: NA
+  rfm: NA
+  rules: NA
+  forecast: NA
+  sections: NA
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(data.table)
+library(knitr)
+library(plotly)
+```
+
+## Executive Summary
+This report presents an overview of the E-Commerce analytics data.
+
+**Total Orders:** `r uniqueN(params$data$Order_ID)`  
+**Total Revenue:** $`r formatC(sum(params$data$Sales, na.rm=TRUE), format="f", digits=2, big.mark=",")`  
+**Total Customers:** `r uniqueN(params$data$Customer_ID)`  
+
+```{r}
+if("Sales Trends" %in% params$sections) {
+  cat("## Sales Trends\n")
+  monthly <- params$data[, .(Sales = sum(Sales, na.rm=TRUE)), by = .(Month = lubridate::floor_date(Order_Date, "month"))][order(Month)]
+  kable(head(monthly, 12), caption = "Recent Monthly Sales")
+}
+```
+
+```{r}
+if("Product Performance" %in% params$sections) {
+  cat("## Product Performance\n")
+  top_prods <- params$data[, .(Sales = sum(Sales, na.rm = TRUE)), by = .(Product_ID, Product_Name)][order(-Sales)][1:10]
+  kable(top_prods, caption = "Top 10 Products by Revenue")
+}
+```
+
+```{r}
+if("Customer RFM" %in% params$sections && !is.null(params$rfm)) {
+  cat("## RFM Segmentation\n")
+  seg_counts <- params$rfm[, .N, by = Segment][order(-N)]
+  kable(seg_counts, caption = "Customer Segments")
+}
+```
+
+```{r}
+if("Forecast" %in% params$sections && !is.null(params$forecast)) {
+  cat("## Sales Forecast\n")
+  kable(params$forecast$table, caption = "Forecast Values")
+}
+```

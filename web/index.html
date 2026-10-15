@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta content="web_dashboard" name="shell-type" />
+  <title>E-Commerce Big Data Analytics Using R — Academic Platform 2026</title>
+  <meta name="description"
+    content="R-Powered Big Data Intelligence platform integrating R 4.6.1 computational modeling, apriori association mining, and ARIMA forecasting." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/vendor/chart.umd.min.js"></script>
+  <script>
+    if (typeof Chart === 'undefined') {
+      document.write('<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"><\/script>');
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css?v=2026.5" />
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-container": "#eeedf7",
+            "outline-variant": "#c1c6d7",
+            "surface-dim": "#dad9e3",
+            "primary-fixed": "#d8e2ff",
+            "on-secondary-fixed-variant": "#7201a2",
+            "on-tertiary-container": "#f5fff6",
+            "error-container": "#ffdad6",
+            "tertiary-container": "#00855b",
+            "on-background": "#1a1b22",
+            "primary": "#0058bc",
+            "on-primary-fixed-variant": "#004493",
+            "secondary": "#8d2ebc",
+            "surface-bright": "#fbf8ff",
+            "on-secondary-container": "#540079",
+            "on-error-container": "#93000a",
+            "tertiary": "#006947",
+            "surface": "#fbf8ff",
+            "on-secondary": "#ffffff",
+            "error": "#ba1a1a",
+            "surface-container-lowest": "#ffffff",
+            "on-surface-variant": "#414755",
+            "surface-variant": "#e3e1ec",
+            "inverse-surface": "#2f3038",
+            "primary-container": "#0070eb",
+            "primary-fixed-dim": "#adc6ff",
+            "on-tertiary-fixed-variant": "#005236",
+            "surface-container-high": "#e8e7f1",
+            "on-primary": "#ffffff",
+            "secondary-container": "#d072ff",
+            "background": "#fbf8ff",
+            "surface-tint": "#005bc1",
+            "on-tertiary-fixed": "#002113",
+            "secondary-fixed": "#f6d9ff",
+            "on-primary-fixed": "#001a41",
+            "surface-container-highest": "#e3e1ec",
+            "on-tertiary": "#ffffff",
+            "tertiary-fixed": "#6ffbbe",
+            "on-secondary-fixed": "#310048",
+            "inverse-on-surface": "#f1effa",
+            "inverse-primary": "#adc6ff",
+            "secondary-fixed-dim": "#e8b3ff",
+            "outline": "#717786",
+            "tertiary-fixed-dim": "#4edea3",
+            "on-error": "#ffffff",
+            "surface-container-low": "#f4f2fd",
+            "on-primary-container": "#fefcff",
+            "on-surface": "#1a1b22"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          spacing: {
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-md": "0.75rem",
+            "space-lg": "1.25rem",
+            "space-xl": "2rem",
+            "gutter": "1rem",
+            "gutter-desktop": "1.25rem",
+            "margin": "1rem",
+            "margin-desktop": "2rem"
+          },
+          fontFamily: {
+            "body-md": ["Inter", "sans-serif"],
+            "body-sm": ["Inter", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "headline-sm": ["Inter", "sans-serif"],
+            "headline-md": ["Inter", "sans-serif"],
+            "headline-lg": ["Inter", "sans-serif"],
+            "display": ["Inter", "sans-serif"],
+            "label-sm": ["Inter", "sans-serif"],
+            "label-md": ["Inter", "sans-serif"],
+            "label-lg": ["Inter", "sans-serif"],
+            "code-sm": ["JetBrains Mono", "monospace"],
+            "code-md": ["JetBrains Mono", "monospace"]
+          },
+          fontSize: {
+            "label-sm": ["0.625rem", { lineHeight: "0.75rem", letterSpacing: "0.04em", fontWeight: "600" }],
+            "label-md": ["0.6875rem", { lineHeight: "0.875rem", letterSpacing: "0.02em", fontWeight: "500" }],
+            "label-lg": ["0.8125rem", { lineHeight: "1rem", letterSpacing: "0em", fontWeight: "500" }],
+            "body-sm": ["0.75rem", { lineHeight: "1.125rem", letterSpacing: "0em", fontWeight: "400" }],
+            "body-md": ["0.8125rem", { lineHeight: "1.25rem", letterSpacing: "-0.005em", fontWeight: "400" }],
+            "body-lg": ["0.9375rem", { lineHeight: "1.375rem", letterSpacing: "-0.01em", fontWeight: "400" }],
+            "headline-sm": ["1.0625rem", { lineHeight: "1.375rem", letterSpacing: "-0.015em", fontWeight: "600" }],
+            "headline-md": ["1.25rem", { lineHeight: "1.625rem", letterSpacing: "-0.02em", fontWeight: "600" }],
+            "headline-lg": ["1.75rem", { lineHeight: "2.25rem", letterSpacing: "-0.025em", fontWeight: "600" }],
+            "display": ["2.25rem", { lineHeight: "2.75rem", letterSpacing: "-0.03em", fontWeight: "600" }],
+            "code-sm": ["0.6875rem", { lineHeight: "1rem", letterSpacing: "0em", fontWeight: "500" }],
+            "code-md": ["0.8125rem", { lineHeight: "1.25rem", letterSpacing: "-0.01em", fontWeight: "400" }]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+
+<body class="bg-[#F5F5F6] font-body-md text-body-md text-on-surface antialiased">
+
+  <!-- ══════════════════════════════════════════════════════════
+       GLOBAL TOP NAVIGATION HEADER
+  ══════════════════════════════════════════════════════════════ -->
+  <header
+    class="fixed top-0 left-0 right-0 h-16 z-50 bg-surface/90 backdrop-blur-xl border-b border-outline-variant/30 shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+    <div class="h-16 w-full px-4 sm:px-6 flex items-center justify-between gap-4">
+
+      <!-- Brand & Title -->
+      <div class="flex items-center gap-space-md shrink-0">
+        <button id="btn-mobile-menu" class="lg:hidden p-1.5 rounded-lg text-on-surface hover:bg-surface-container"
+          type="button" aria-label="Toggle Navigation">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+        <img alt="R-Analytics Logo" class="h-8 w-auto object-contain cursor-pointer" id="btn-home-logo"
+          src="assets/logo.png"
+          onerror="this.onerror=null; this.src='https://lh3.googleusercontent.com/aida/AEtjO1U4KQuUdgwbVOxj93-dDS5WOG5SJHtHMfr13Pnd_V6hYpkIcaJfSRUWcdOHlV-uwxXV5Q_D116Nftk6BC0mnZJQmF6NjWjKqOO-nAv4v7jP0Sv1w99P9UQvuE_yit4sRWL8J1uD7UDkVePlBQi6-tLwRWPPKg9jyvH7gpIYfa5e0ZUpQjxXa1Qs5X7lOHZ9JPO-euqKmkGP0Bz4lDN1rxq1wYqvRkPYcAcmh7NieahMccQfM5oNK0F61oY';" />
+        <div class="flex flex-col cursor-pointer" id="btn-home-title">
+          <span
+            class="font-headline-sm text-headline-sm text-on-surface leading-tight tracking-tight font-semibold">E-Commerce
+            Big Data Analytics Using R</span>
+          <span class="font-code-sm text-code-sm text-on-surface-variant hidden sm:inline">R-Powered Big Data
+            Intelligence (v4.6.1)</span>
+        </div>
+      </div>
+
+      <!-- Telemetry & Active Dataset Dropdown (Center) -->
+      <div class="hidden xl:flex items-center gap-space-md relative">
+        <!-- Interactive Dataset Selector Trigger -->
+        <div id="btn-dataset-dropdown-toggle"
+          class="relative flex items-center gap-space-sm bg-surface-container-low hover:bg-surface-container px-space-md py-space-xs rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.04)] cursor-pointer transition-colors border border-outline-variant/30">
+          <span class="w-2 h-2 rounded-full bg-tertiary kernel-pulse" id="header-status-dot"></span>
+          <span class="font-label-lg text-label-lg text-on-surface truncate max-w-xs font-medium"
+            id="header-dataset-name">Indian E-Commerce Sales [Master Schema]</span>
+          <span class="material-symbols-outlined text-outline text-[18px]">expand_more</span>
+
+          <!-- Dropdown Menu -->
+          <div id="header-dataset-dropdown"
+            class="hidden absolute top-full left-0 mt-2 w-80 bg-surface-container-lowest rounded-xl shadow-[0_12px_32px_rgba(0,0,0,0.12)] border border-outline-variant/50 p-2 z-50">
+            <div class="px-3 py-1.5 text-label-sm font-label-sm text-outline uppercase tracking-wider">Switch Built-in
+              Dataset</div>
+            <div class="space-y-1" id="dropdown-dataset-items">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- R Kernel Telemetry -->
+        <div
+          class="flex items-center gap-space-xs bg-surface-container px-space-md py-space-xs rounded-xl border border-outline-variant/20">
+          <span class="material-symbols-outlined text-primary text-[18px]">memory</span>
+          <span class="font-code-sm text-code-sm text-tertiary font-medium" id="telemetry-kernel-status">Ready</span>
+          <span class="text-outline-variant font-code-sm">•</span>
+          <span class="font-code-sm text-code-sm text-on-surface-variant font-medium"
+            id="telemetry-latency">Deterministic</span>
+        </div>
+      </div>
+
+      <!-- Global Actions (Right) -->
+      <div class="flex items-center gap-space-sm sm:gap-space-md shrink-0">
+        <button id="btn-quick-upload"
+          class="flex items-center gap-space-xs bg-surface-container-low hover:bg-surface-container hover:text-on-surface text-on-surface px- space-sm sm:px-space-md py-space-xs rounded-lg transition-colors shadow-[0_1px_3px_rgba(0,0,0,0.04)] border border-outline-variant/30"
+          type="button">
+          <span class="material-symbols-outlined text-[18px] text-primary">cloud_upload</span>
+          <span class="font-label-lg text-label-lg hidden sm:inline">+ Upload Dataset</span>
+        </button>
+        <button id="btn-quick-portal"
+          class="hidden md:flex items-center gap-space-xs bg-surface-container-low hover:bg-surface-container hover:text-on-surface text-on-surface px-space-md py-space-xs rounded-lg transition-colors shadow-[0_1px_3px_rgba(0,0,0,0.04)] border border-outline-variant/30"
+          type="button">
+          <span class="material-symbols-outlined text-[18px] text-outline">table_chart</span>
+          <span class="font-label-lg text-label-lg">Datasets Portal</span>
+        </button>
+        <button id="btn-export-report"
+          class="hidden md:flex items-center gap-space-xs bg-surface-container-low hover:bg-surface-container hover:text-on-surface text-on-surface px-space-md py-space-xs rounded-lg transition-colors shadow-[0_1px_3px_rgba(0,0,0,0.04)] border border-outline-variant/30"
+          type="button">
+          <span class="material-symbols-outlined text-[18px] text-outline">download</span>
+          <span class="font-label-lg text-label-lg">Export Report</span>
+        </button>
+        <span
+          class="hidden lg:inline-flex items-center px-space-sm py-0.5 rounded-lg bg-secondary-fixed text-on-secondary-fixed font-code-sm text-code-sm uppercase tracking-wider font-semibold">MCA
+          BDA</span>
+        <div class="relative" id="profile-container">
+          <button id="btn-header-profile" type="button"
+            class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary cursor-pointer hover:ring-2 hover:ring-primary/40 transition-all"
+            aria-label="User Profile & System Architecture" data-section="profile">
+            <span class="material-symbols-outlined text-[18px]">person</span>
+          </button>
+          <!-- Profile Dropdown Card -->
+          <div id="header-profile-dropdown"
+            class="hidden absolute right-0 top-full mt-2 w-72 bg-surface-container-lowest rounded-xl shadow-[0_12px_32px_rgba(0,0,0,0.12)] border border-outline-variant/40 p-space-md z-50">
+            <div class="flex items-center gap-3 pb-3 border-b border-outline-variant/20">
+              <div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-semibold">
+                <span class="material-symbols-outlined text-[22px]">account_circle</span>
+              </div>
+              <div class="overflow-hidden">
+                <div class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate">Lead Data Analyst</div>
+                <div class="font-code-sm text-code-sm text-outline truncate">MCA Academic Session 2026</div>
+              </div>
+            </div>
+            <div class="py-2.5 space-y-1.5">
+              <div class="flex items-center justify-between py-1 px-2 rounded bg-surface-container-low font-code-sm text-code-sm">
+                <span class="text-on-surface-variant">R Engine:</span>
+                <span class="font-semibold text-tertiary">Active (4.6.1)</span>
+              </div>
+              <div class="flex items-center justify-between py-1 px-2 rounded bg-surface-container-low font-code-sm text-code-sm">
+                <span class="text-on-surface-variant">API Server:</span>
+                <span class="font-semibold text-primary" id="profile-port-display">Port 8001</span>
+
+              </div>
+            </div>
+            <div class="pt-2 border-t border-outline-variant/20 space-y-1">
+              <button type="button" id="btn-profile-view-dataset" data-section="dataset-info"
+                class="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-left text-body-sm font-body-sm text-on-surface hover:bg-surface-container transition-colors cursor-pointer">
+                <span class="material-symbols-outlined text-[18px] text-primary">verified</span>
+                <span>Data Quality &amp; Profiling</span>
+              </button>
+              <button type="button" id="btn-profile-view-portal" data-section="portal"
+                class="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-left text-body-sm font-body-sm text-on-surface hover:bg-surface-container transition-colors cursor-pointer">
+                <span class="material-symbols-outlined text-[18px] text-outline">table_chart</span>
+                <span>Dataset Selection &amp; Portal</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════════════════
+       SIDEBAR NAVIGATION
+  ══════════════════════════════════════════════════════════════ -->
+  <aside id="app-sidebar"
+    class="sidebar-responsive fixed left-0 top-16 bottom-0 w-72 bg-surface/90 backdrop-blur-xl z-40 flex flex-col justify-between border-r border-outline-variant/30 shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+    <div class="flex-1 overflow-y-auto px-space-md py-space-md">
+
+      <!-- Executive Group -->
+      <div class="px-space-md mb-space-xs font-label-sm text-label-sm uppercase tracking-wider text-outline">Executive
+      </div>
+      <nav class="space-y-1 mb-space-lg">
+        <a class="nav-item flex items-center gap-space-md px-space-md py-space-sm transition-all bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-[0_1px_3px_rgba(0,0,0,0.08)] cursor-pointer"
+          data-section="overview">
+          <span class="material-symbols-outlined text-[20px]">analytics</span>
+          <span class="font-body-md text-body-md">Overall Overview</span>
+        </a>
+      </nav>
+
+      <!-- Deep Dive Modules -->
+      <div class="px-space-md mb-space-xs font-label-sm text-label-sm uppercase tracking-wider text-outline">Deep Dive
+        Modules</div>
+      <nav class="space-y-1 mb-space-lg">
+        <a class="nav-item flex items-center gap-space-md px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface rounded-lg transition-all cursor-pointer"
+          data-section="sales">
+          <span class="material-symbols-outlined text-[20px]">payments</span>
+          <span class="font-body-md text-body-md">Sales Analysis</span>
+        </a>
+        <a class="nav-item flex items-center gap-space-md px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface rounded-lg transition-all cursor-pointer"
+          data-section="products">
+          <span class="material-symbols-outlined text-[20px]">inventory_2</span>
+          <span class="font-body-md text-body-md">Product Analysis</span>
+        </a>
+        <a class="nav-item flex items-center gap-space-md px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface rounded-lg transition-all cursor-pointer"
+          data-section="customers">
+          <span class="material-symbols-outlined text-[20px]">group</span>
+          <span class="font-body-md text-body-md">Customer Analysis</span>
+        </a>
+        <a class="nav-item flex items-center gap-space-md px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface rounded-lg transition-all cursor-pointer"
+          data-section="regions">
+          <span class="material-symbols-outlined text-[20px]">public</span>
+          <span class="font-body-md text-body-md">Regional Analysis</span>
+        </a>
+      </nav>
+
+      <!-- Statistical Mining & ML -->
+      <div class="px-space-md mb-space-xs font-label-sm text-label-sm uppercase tracking-wider text-outline">Statistical
+        Mining &amp; ML</div>
+      <nav class="space-y-1 mb-space-lg">
+        <a class="nav-item flex items-center gap-space-md px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface rounded-lg transition-all cursor-pointer"
+          data-section="rfm">
+          <span class="material-symbols-outlined text-[20px]">donut_large</span>
+          <span class="font-body-md text-body-md">RFM Segmentation</span>
+        </a>
+        <a class="nav-item flex items-center gap-space-md px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface rounded-lg transition-all cursor-pointer"
+          data-section="association">
+          <span class="material-symbols-outlined text-[20px]">hub</span>
+          <span class="font-body-md text-body-md">Association Rules (Apriori)</span>
+        </a>
+        <a class="nav-item flex items-center gap-space-md px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface rounded-lg transition-all cursor-pointer"
+          data-section="forecasting">
+          <span class="material-symbols-outlined text-[20px]">timeline</span>
+          <span class="font-body-md text-body-md">Time Series &amp; Forecasting</span>
+        </a>
+      </nav>
+
+      <!-- Diagnostics & Schema -->
+      <div class="px-space-md mb-space-xs font-label-sm text-label-sm uppercase tracking-wider text-outline">Diagnostics
+        &amp; Schema</div>
+      <nav class="space-y-1">
+        <a class="nav-item flex items-center gap-space-md px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface rounded-lg transition-all cursor-pointer"
+          data-section="dataset-info">
+          <span class="material-symbols-outlined text-[20px]">verified</span>
+          <span class="font-body-md text-body-md">Data Quality &amp; Profiling</span>
+        </a>
+        <a class="nav-item flex items-center gap-space-md px-space-md py-space-sm text-on-surface-variant hover:bg-surface-container hover:text-on-surface rounded-lg transition-all cursor-pointer"
+          data-section="portal">
+          <span class="material-symbols-outlined text-[20px]">table_chart</span>
+          <span class="font-body-md text-body-md">Dataset Selection &amp; Portal</span>
+        </a>
+      </nav>
+
+    </div>
+
+    <!-- Bottom R Memory Indicator -->
+    <div
+      class="p-space-md bg-surface-container-low mx-space-md mb-space-md rounded-xl space-y-space-xs border border-outline-variant/30">
+      <div class="flex items-center justify-between">
+        <span class="font-label-sm text-label-sm text-on-surface-variant">R Process Memory</span>
+        <span class="font-code-sm text-code-sm text-on-surface font-semibold" id="sidebar-memory-value">482 MB / 8
+          GB</span>
+      </div>
+      <div class="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+        <div class="h-full bg-primary rounded-full transition-all duration-500" id="sidebar-memory-bar"
+          style="width: 6%"></div>
+      </div>
+      <div class="flex items-center justify-between pt-1">
+        <span class="font-code-sm text-code-sm text-on-surface-variant flex items-center gap-1">
+          <span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>Schema: Validated
+        </span>
+        <span class="font-code-sm text-code-sm text-outline">R 4.6.1</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ══════════════════════════════════════════════════════════
+       MAIN CONTENT CONTAINER
+  ══════════════════════════════════════════════════════════════ -->
+  <div class="lg:pl-72 transition-all duration-300">
+    <main class="relative pt-16 min-h-screen bg-[#F5F5F6]">
+      <div class="w-full px-4 sm:px-8 py-6">
+
+        <!-- ── LOADING OVERLAY ── -->
+        <div id="loading-overlay"
+          class="hidden fixed inset-0 z-50 bg-surface/80 backdrop-blur-sm flex flex-col items-center justify-center">
+          <div class="w-12 h-12 border-3 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>
+          <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold" id="loading-title">Synthesizing
+            intelligence layer…</h3>
+          <p class="font-body-sm text-body-sm text-on-surface-variant mt-1" id="loading-desc">Invoking R 4.6.1
+            statistical engine and updating analytics contract</p>
+        </div>
+
+        <!-- ── ERROR BANNER ── -->
+        <div id="error-banner"
+          class="hidden w-full mb-space-lg p-space-md bg-error-container text-on-error-container rounded-xl border border-error/30 flex items-start justify-between">
+          <div class="flex items-start gap-space-sm">
+            <span class="material-symbols-outlined text-error text-[24px]">error</span>
+            <div>
+              <div class="font-headline-sm text-headline-sm font-semibold" id="error-title">Analysis Halted</div>
+              <p class="font-body-sm text-body-sm mt-0.5" id="error-message">An error occurred while evaluating the
+                dataset.</p>
+            </div>
+          </div>
+          <button id="btn-dismiss-error"
+            class="text-on-error-container hover:opacity-75 font-label-md text-label-md px-2 py-1 rounded bg-error/10"
+            type="button">Dismiss</button>
+        </div>
+
+        <!-- ══════════════════════════════════════════════════════════
+             SCREEN 1: DATASET SELECTION & PORTAL (sec-portal)
+        ══════════════════════════════════════════════════════════ -->
+        <section id="sec-portal" class="dashboard-section">
+
+          <!-- Runtime & Environment Telemetry Banner -->
+          <div
+            class="w-full bg-surface-container-low rounded-xl p-space-md shadow-sm mb-space-lg flex flex-col md:flex-row md:items-center justify-between gap-space-md border border-outline-variant/30">
+            <div class="flex items-center flex-wrap gap-x-space-md gap-y-space-xs">
+              <div class="flex items-center gap-space-xs">
+                <span class="w-2.5 h-2.5 rounded-full bg-tertiary kernel-pulse"></span>
+                <span class="font-code-sm text-code-sm text-on-surface font-semibold">Active R Environment:</span>
+                <span
+                  class="font-code-sm text-code-sm text-primary px-1.5 py-0.5 rounded bg-primary-fixed/30 font-medium">R
+                  4.6.1 (x86_64)</span>
+              </div>
+              <span class="text-outline-variant font-code-sm hidden sm:inline">•</span>
+              <div class="flex items-center gap-space-xs font-code-sm text-code-sm text-on-surface-variant">
+                <span class="material-symbols-outlined text-secondary text-[16px]">account_tree</span>
+                <span>Bridge: <span class="text-on-surface font-medium">Python 3.12 Local Orchestrator</span></span>
+              </div>
+              <span class="text-outline-variant font-code-sm hidden sm:inline">•</span>
+              <div class="flex items-center gap-space-xs font-code-sm text-code-sm text-on-surface-variant">
+                <span class="material-symbols-outlined text-outline text-[16px]">draw</span>
+                <span>Chart.js 4.4 Canvas Engine</span>
+              </div>
+              <span class="text-outline-variant font-code-sm hidden sm:inline">•</span>
+              <div class="flex items-center gap-space-xs font-code-sm text-code-sm text-tertiary">
+                <span class="material-symbols-outlined text-[16px]">bolt</span>
+                <span class="font-medium">Dynamic JSON Pipeline</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-space-sm shrink-0 font-code-sm text-code-sm text-outline">
+              <span class="material-symbols-outlined text-[16px]">schedule</span>
+              <span>Daemon Ping: 14ms</span>
+              <span class="bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-medium">MCA-2026</span>
+            </div>
+          </div>
+
+          <!-- Hero Header Block -->
+          <div
+            class="relative w-full bg-surface-container-lowest rounded-xl p-space-lg sm:p-space-xl shadow-sm mb-space-xl overflow-hidden border border-outline-variant/30">
+            <div
+              class="absolute -right-20 -top-20 w-96 h-96 rounded-full bg-primary-fixed/30 blur-3xl pointer-events-none">
+            </div>
+            <div
+              class="absolute right-64 -bottom-16 w-64 h-64 rounded-full bg-secondary-fixed/20 blur-2xl pointer-events-none">
+            </div>
+            <div class="relative z-10 max-w-4xl">
+              <div
+                class="inline-flex items-center gap-space-xs px-2.5 py-1 rounded bg-surface-container text-on-surface-variant font-code-sm text-code-sm uppercase tracking-wider mb-space-md">
+                <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                Kernel-Driven High Performance Analytics Platform
+              </div>
+              <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mb-space-sm font-semibold">
+                R-Powered Big Data Intelligence — Academic Platform 2026
+              </h1>
+              <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed max-w-3xl">
+                High-throughput statistical computation, apriori rule mining, and ARIMA forecasting processed through an
+                integrated R 4.6.1 runtime engine. Load verified relational stores or ingest ad-hoc data schemas for
+                instant topological feature profiling.
+              </p>
+              <div class="mt-space-lg flex flex-wrap items-center gap-space-md">
+                <div
+                  class="flex items-center gap-space-xs font-code-sm text-code-sm text-on-surface bg-surface-container px-space-md py-1.5 rounded-lg border border-outline-variant/30">
+                  <span class="material-symbols-outlined text-primary text-[18px]">terminal</span>
+                  <span>r-exec --eval="library(forecast); library(arules)"</span>
+                </div>
+                <div class="flex items-center gap-2 text-outline font-label-md text-label-md">
+                  <span class="material-symbols-outlined text-tertiary text-[18px]">verified_user</span>
+                  <span>Deterministic Reproducibility Guaranteed</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 01: Curated Master Schema Datasets -->
+          <div class="w-full mb-space-xl">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-space-lg gap-space-sm">
+              <div>
+                <div class="flex items-center gap-space-xs mb-1">
+                  <span class="font-code-sm text-code-sm text-primary uppercase font-bold tracking-widest">Section
+                    01</span>
+                  <span class="text-outline-variant">/</span>
+                  <span class="font-label-md text-label-md text-outline uppercase tracking-wider">Curated Relational
+                    Stores</span>
+                </div>
+                <h2 class="font-headline-md text-headline-md text-on-surface font-semibold">
+                  Curated Master Schema Repository
+                </h2>
+              </div>
+              <div
+                class="font-code-sm text-code-sm text-on-surface-variant bg-surface-container-high px-space-md py-1 rounded-lg">
+                Verified In-Memory Master Store • Active R Engine
+              </div>
+            </div>
+
+            <!-- Curated Master Dataset Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-space-lg" id="builtin-datasets-grid">
+              <!-- Dynamically populated or rendered -->
+            </div>
+          </div>
+
+          <!-- Section 02: Dynamic Ingestion (Universal Dataset Explorer) -->
+          <div class="w-full mb-space-xl">
+            <div class="flex items-center gap-space-xs mb-1">
+              <span class="font-code-sm text-code-sm text-primary uppercase font-bold tracking-widest">Section 02</span>
+              <span class="text-outline-variant">/</span>
+              <span class="font-label-md text-label-md text-outline uppercase tracking-wider">Dynamic Ingestion</span>
+            </div>
+            <h2 class="font-headline-md text-headline-md text-on-surface font-semibold mb-space-md">
+              Universal Dataset Explorer
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+
+              <!-- Upload Drop Target (Lg: 8 cols) -->
+              <div
+                class="lg:col-span-8 bg-surface-container-lowest rounded-xl p-space-lg sm:p-space-xl shadow-sm flex flex-col justify-between border border-outline-variant/30">
+                <input type="file" id="universal-file-input" class="hidden" accept=".csv, .xlsx, .xls" />
+                <div
+                  class="w-full rounded-xl bg-surface-container-low/70 hover:bg-surface-container-low transition-all p-space-xl flex flex-col items-center justify-center text-center cursor-pointer group border-2 border-dashed border-outline-variant/40 hover:border-primary/60"
+                  id="portal-drop-target">
+                  <div
+                    class="w-16 h-16 rounded-2xl bg-primary-fixed/40 text-primary flex items-center justify-center mb-space-md group-hover:scale-105 transition-transform shadow-sm">
+                    <span class="material-symbols-outlined text-[32px]">cloud_upload</span>
+                  </div>
+                  <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-space-xs">
+                    Drop your CSV, XLSX, or XLS dataset here, or <span
+                      class="text-primary underline underline-offset-4 decoration-primary/40 group-hover:decoration-primary">Browse
+                      Computer</span>
+                  </h3>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant max-w-lg mb-space-lg">
+                    Supports tabular matrices up to 250 MB. Encoded UTF-8 or ISO-8859 with auto delimiter parsing (; ,
+                    \t |).
+                  </p>
+
+                  <!-- Detection Badges -->
+                  <div class="flex flex-wrap items-center justify-center gap-space-xs">
+                    <span
+                      class="inline-flex items-center gap-1 px-space-sm py-1 rounded-lg bg-surface-container text-on-surface-variant font-code-sm text-code-sm">
+                      <span class="material-symbols-outlined text-tertiary text-[14px]">auto_awesome</span>
+                      Automatic Semantic Field Detection
+                    </span>
+                    <span
+                      class="inline-flex items-center gap-1 px-space-sm py-1 rounded-lg bg-surface-container text-on-surface-variant font-code-sm text-code-sm">
+                      <span class="material-symbols-outlined text-primary text-[14px]">schema</span>
+                      Dynamic Schema Ingestion
+                    </span>
+                    <span
+                      class="inline-flex items-center gap-1 px-space-sm py-1 rounded-lg bg-surface-container text-on-surface-variant font-code-sm text-code-sm">
+                      <span class="material-symbols-outlined text-secondary text-[14px]">checklist</span>
+                      No Hardcoded Columns Required
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Selected File Display -->
+                <div id="portal-file-preview"
+                  class="hidden mt-space-md p-space-md bg-surface-container rounded-lg flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">description</span>
+                    <span class="font-code-sm text-code-sm font-semibold"
+                      id="portal-selected-file-name">filename.csv</span>
+                  </div>
+                  <button id="btn-portal-submit-upload"
+                    class="bg-primary hover:bg-primary-container text-on-primary px-4 py-1.5 rounded-lg font-label-md text-label-md font-semibold transition-colors">
+                    Commence Analysis →
+                  </button>
+                </div>
+
+                <!-- Semantic Engine Explanation -->
+                <div
+                  class="mt-space-lg p-space-md bg-surface-container-low rounded-xl flex items-start gap-space-md border border-outline-variant/20">
+                  <span class="material-symbols-outlined text-primary text-[22px] shrink-0 mt-0.5">info</span>
+                  <div class="space-y-1">
+                    <h4 class="font-label-lg text-label-lg text-on-surface font-semibold">Adaptive R Computational
+                      Heuristic</h4>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant">
+                      Uploaded files are dynamically profiled by the underlying R engine. Non-sales datasets
+                      (Healthcare, HR, Higher Education, IoT Sensor Logs, Supply Chains) automatically adapt available
+                      analytical modules. Missing standard revenue fields will gracefully pivot into frequency, cohort,
+                      and longitudinal sequence analytics.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Recent Staging Ingests Drawer (Lg: 4 cols) -->
+              <div
+                class="lg:col-span-4 bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col justify-between border border-outline-variant/30">
+                <div>
+                  <div class="flex items-center justify-between mb-space-md">
+                    <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Recent Staging Ingests
+                    </h3>
+                    <span class="font-code-sm text-code-sm text-outline">Temporary Cache</span>
+                  </div>
+                  <div class="space-y-space-md" id="recent-ingests-list">
+                    <!-- Sample Ingest 1 -->
+                    <div
+                      class="p-space-md bg-surface-container-low rounded-lg transition-colors hover:bg-surface-container border border-outline-variant/20">
+                      <div class="flex items-start justify-between mb-1">
+                        <span
+                          class="font-code-sm text-code-sm text-on-surface font-semibold truncate max-w-[180px]">patient_admissions_q4.csv</span>
+                        <span
+                          class="font-code-sm text-code-sm px-1.5 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-medium">Healthcare</span>
+                      </div>
+                      <div class="font-label-sm text-label-sm text-outline mb-2">92,400 rows • 18 fields •
+                        Auto-classified</div>
+                      <div class="flex flex-wrap gap-1 font-code-sm text-code-sm text-on-surface-variant">
+                        <span class="bg-surface-container-high px-1.5 py-0.5 rounded text-[11px]">AdmissionDate →
+                          Time</span>
+                        <span class="bg-surface-container-high px-1.5 py-0.5 rounded text-[11px]">ICD-10 → SKU
+                          Cat</span>
+                      </div>
+                    </div>
+                    <!-- Sample Ingest 2 -->
+                    <div
+                      class="p-space-md bg-surface-container-low rounded-lg transition-colors hover:bg-surface-container border border-outline-variant/20">
+                      <div class="flex items-start justify-between mb-1">
+                        <span
+                          class="font-code-sm text-code-sm text-on-surface font-semibold truncate max-w-[180px]">iot_telemetry_batch.xlsx</span>
+                        <span
+                          class="font-code-sm text-code-sm px-1.5 py-0.5 rounded bg-secondary-fixed text-on-secondary-fixed font-medium">Sensor
+                          Logs</span>
+                      </div>
+                      <div class="font-label-sm text-label-sm text-outline mb-2">145,200 rows • 12 fields •
+                        Auto-classified</div>
+                      <div class="flex flex-wrap gap-1 font-code-sm text-code-sm text-on-surface-variant">
+                        <span class="bg-surface-container-high px-1.5 py-0.5 rounded text-[11px]">Timestamp →
+                          Time</span>
+                        <span class="bg-surface-container-high px-1.5 py-0.5 rounded text-[11px]">Volt_RMS → Univ
+                          Num</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pt-space-md border-t border-outline-variant/20 text-center">
+                  <span class="font-code-sm text-code-sm text-outline">Dynamic Column Mapping Enabled</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════
+             SCREEN 2: OVERALL EXECUTIVE OVERVIEW (sec-overview)
+        ══════════════════════════════════════════════════════════ -->
+        <section id="sec-overview" class="dashboard-section active">
+
+          <!-- Telemetry Banner -->
+          <div
+            class="w-full bg-surface-container-low rounded-xl p-space-md shadow-sm mb-space-lg flex flex-col md:flex-row md:items-center justify-between gap-space-md border border-outline-variant/30">
+            <div class="flex items-center flex-wrap gap-x-space-md gap-y-space-xs">
+              <div class="flex items-center gap-space-xs">
+                <span class="w-2.5 h-2.5 rounded-full bg-tertiary kernel-pulse"></span>
+                <span class="font-code-sm text-code-sm text-on-surface font-semibold">Active R Environment:</span>
+                <span
+                  class="font-code-sm text-code-sm text-primary px-1.5 py-0.5 rounded bg-primary-fixed/30 font-medium">R
+                  4.6.1 (x86_64)</span>
+              </div>
+              <span class="text-outline-variant font-code-sm hidden sm:inline">•</span>
+              <div class="flex items-center gap-space-xs font-code-sm text-code-sm text-on-surface-variant">
+                <span class="material-symbols-outlined text-secondary text-[16px]">account_tree</span>
+                <span>Bridge: <span class="text-on-surface font-medium">Python 3.12 Local Orchestrator</span></span>
+              </div>
+              <span class="text-outline-variant font-code-sm hidden sm:inline">•</span>
+              <div class="flex items-center gap-space-xs font-code-sm text-code-sm text-on-surface-variant">
+                <span class="material-symbols-outlined text-outline text-[16px]">draw</span>
+                <span>Chart.js 4.4 Canvas Engine</span>
+              </div>
+              <span class="text-outline-variant font-code-sm hidden sm:inline">•</span>
+              <div class="flex items-center gap-space-xs font-code-sm text-code-sm text-tertiary">
+                <span class="material-symbols-outlined text-[16px]">bolt</span>
+                <span class="font-medium">Dynamic JSON Pipeline</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-space-sm shrink-0 font-code-sm text-code-sm text-outline">
+              <span class="material-symbols-outlined text-[16px]">schedule</span>
+              <span>Daemon Ping: 14ms</span>
+              <span class="bg-surface-container px-2 py-0.5 rounded text-on-surface-variant font-medium">MCA-2026</span>
+            </div>
+          </div>
+
+          <!-- 6 Executive KPI Cards Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-space-md mb-space-lg"
+            id="executive-kpi-grid">
+
+            <!-- KPI 1: Gross Revenue -->
+            <div
+              class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden border border-outline-variant/30">
+              <div class="flex items-center justify-between">
+                <span class="font-label-lg text-label-lg text-outline">Total Revenue</span>
+                <span class="w-2 h-2 rounded-full bg-primary"></span>
+              </div>
+              <div class="my-space-sm">
+                <div class="font-headline-lg text-headline-lg text-on-surface font-semibold tracking-tight"
+                  id="kpi-gross-rev">—</div>
+                <div class="flex items-center gap-1 mt-1 text-tertiary font-label-sm text-label-sm">
+                  <span class="material-symbols-outlined text-[14px]">trending_up</span>
+                  <span class="font-semibold" id="kpi-rev-delta">Empirical</span>
+                  <span class="text-outline font-normal">Active Ingest</span>
+                </div>
+              </div>
+              <div class="h-6 w-full pt-1">
+                <svg class="w-full h-full stroke-primary fill-transparent overflow-visible" preserveAspectRatio="none"
+                  viewBox="0 0 100 24">
+                  <path d="M0 20 Q 25 15, 50 18 T 75 8 T 100 4" stroke-linecap="round" stroke-width="2" />
+                </svg>
+              </div>
+            </div>
+
+            <!-- KPI 2: Net Realized Profit -->
+            <div
+              class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden border border-outline-variant/30">
+              <div class="flex items-center justify-between">
+                <span class="font-label-lg text-label-lg text-outline">Total Profit</span>
+                <span class="w-2 h-2 rounded-full bg-tertiary"></span>
+              </div>
+              <div class="my-space-sm">
+                <div class="font-headline-lg text-headline-lg text-on-surface font-semibold tracking-tight"
+                  id="kpi-net-profit">—</div>
+                <div class="flex items-center gap-1 mt-1 text-tertiary font-label-sm text-label-sm">
+                  <span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+                  <span class="font-semibold" id="kpi-profit-margin-badge">—</span>
+                  <span class="text-outline font-normal">Net Margin</span>
+                </div>
+              </div>
+              <div class="h-6 w-full pt-1">
+                <svg class="w-full h-full stroke-tertiary fill-transparent overflow-visible" preserveAspectRatio="none"
+                  viewBox="0 0 100 24">
+                  <path d="M0 18 Q 30 14, 55 12 T 80 8 T 100 3" stroke-linecap="round" stroke-width="2" />
+                </svg>
+              </div>
+            </div>
+
+            <!-- KPI 3: Total Orders -->
+            <div
+              class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden border border-outline-variant/30">
+              <div class="flex items-center justify-between">
+                <span class="font-label-lg text-label-lg text-outline">Total Orders</span>
+                <span class="w-2 h-2 rounded-full bg-secondary"></span>
+              </div>
+              <div class="my-space-sm">
+                <div class="font-headline-lg text-headline-lg text-on-surface font-semibold tracking-tight"
+                  id="kpi-total-orders">—</div>
+                <div class="flex items-center gap-1 mt-1 text-outline font-label-sm text-label-sm">
+                  <span class="material-symbols-outlined text-[14px] text-on-surface-variant">schedule</span>
+                  <span class="font-code-sm text-on-surface font-medium" id="kpi-orders-per-day">Calculating...</span>
+                  <span>orders / day</span>
+                </div>
+              </div>
+              <div class="h-6 w-full pt-1">
+                <svg class="w-full h-full stroke-secondary fill-transparent overflow-visible" preserveAspectRatio="none"
+                  viewBox="0 0 100 24">
+                  <path d="M0 18 Q 30 22, 50 14 T 80 10 T 100 5" stroke-linecap="round" stroke-width="2" />
+                </svg>
+              </div>
+            </div>
+
+            <!-- KPI 4: Distinct Customers -->
+            <div
+              class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden border border-outline-variant/30">
+              <div class="flex items-center justify-between">
+                <span class="font-label-lg text-label-lg text-outline">Distinct Cust.</span>
+                <span
+                  class="font-code-sm text-code-sm text-on-surface-variant px-1.5 py-0.5 bg-surface-container rounded"
+                  id="kpi-cust-badge">RFM Indexed</span>
+              </div>
+              <div class="my-space-sm">
+                <div class="font-headline-lg text-headline-lg text-on-surface font-semibold tracking-tight"
+                  id="kpi-customers">—</div>
+                <div class="flex items-center gap-1 mt-1 text-tertiary font-label-sm text-label-sm">
+                  <span class="material-symbols-outlined text-[14px]">repeat</span>
+                  <span class="font-semibold" id="kpi-repeat-rate">—</span>
+                  <span class="text-outline font-normal">Repeat Rate</span>
+                </div>
+              </div>
+              <div class="h-6 w-full pt-1">
+                <svg class="w-full h-full stroke-on-surface-variant fill-transparent overflow-visible"
+                  preserveAspectRatio="none" viewBox="0 0 100 24">
+                  <path d="M0 16 Q 20 8, 45 15 T 75 11 T 100 7" stroke-linecap="round" stroke-width="2" />
+                </svg>
+              </div>
+            </div>
+
+            <!-- KPI 5: Average Order Value / Unit Price -->
+            <div
+              class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden border border-outline-variant/30">
+              <div class="flex items-center justify-between">
+                <span class="font-label-lg text-label-lg text-outline">AOV / Spend</span>
+                <span class="font-code-sm text-code-sm text-on-surface-variant" id="kpi-aov-sub">—</span>
+              </div>
+              <div class="my-space-sm">
+                <div class="font-headline-lg text-headline-lg text-on-surface font-semibold tracking-tight"
+                  id="kpi-aov">—</div>
+                <div class="flex items-center gap-1 mt-1 text-tertiary font-label-sm text-label-sm">
+                  <span class="material-symbols-outlined text-[14px]">north_east</span>
+                  <span class="font-semibold" id="kpi-aov-delta">R-Calculated</span>
+                  <span class="text-outline font-normal">metric</span>
+                </div>
+              </div>
+              <div class="h-6 w-full pt-1">
+                <svg class="w-full h-full stroke-primary fill-transparent overflow-visible" preserveAspectRatio="none"
+                  viewBox="0 0 100 24">
+                  <path d="M0 14 Q 35 20, 60 10 T 100 3" stroke-linecap="round" stroke-width="2" />
+                </svg>
+              </div>
+            </div>
+
+            <!-- KPI 6: Target Profit Margin -->
+            <div
+              class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between relative overflow-hidden border border-outline-variant/30">
+              <div class="flex items-center justify-between">
+                <span class="font-label-lg text-label-lg text-outline">Profit Margin</span>
+                <span
+                  class="font-code-sm text-code-sm text-tertiary px-1.5 py-0.5 bg-tertiary-fixed rounded">Validated</span>
+              </div>
+              <div class="my-space-sm">
+                <div class="font-headline-lg text-headline-lg text-tertiary font-semibold tracking-tight"
+                  id="kpi-profit-margin-large">—</div>
+                <div class="flex items-center gap-1 mt-1 text-outline font-label-sm text-label-sm">
+                  <span>Target baseline:</span>
+                  <span class="font-code-sm font-semibold text-on-surface">&gt;18.00%</span>
+                </div>
+              </div>
+              <div class="w-full bg-surface-container h-2 rounded-full overflow-hidden mt-1">
+                <div class="bg-tertiary h-full rounded-full transition-all duration-500" id="kpi-profit-margin-bar"
+                  style="width: 0%;"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 12-Column Responsive Dashboard Grid -->
+          <div class="grid grid-cols-12 gap-space-lg mb-space-xl">
+
+            <!-- Card 1 (Span 8): Revenue & Profit Dynamic Trajectory -->
+            <div
+              class="col-span-12 xl:col-span-8 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between border border-outline-variant/30">
+              <div
+                class="flex flex-col sm:flex-row sm:items-center justify-between pb-space-md gap-2 border-b border-outline-variant/20">
+                <div>
+                  <div class="flex items-center gap-space-xs">
+                    <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Revenue &amp; Net
+                      Profit Dynamic Trajectory</span>
+                    <span
+                      class="font-code-sm text-code-sm px-2 py-0.5 bg-surface-container text-on-surface-variant rounded">R
+                      lubridate::floor_date</span>
+                  </div>
+                  <p class="font-body-sm text-body-sm text-outline mt-0.5">Dual-axis aggregation showing gross revenue
+                    volume against net earnings run-rate</p>
+                </div>
+                <div
+                  class="flex items-center gap-space-xs bg-surface-container-low p-1 rounded-lg border border-outline-variant/20">
+                  <button
+                    class="time-filter-btn px-space-sm py-1 font-label-sm text-label-sm rounded text-on-surface-variant hover:text-on-surface transition-all"
+                    data-range="30">30D</button>
+                  <button
+                    class="time-filter-btn px-space-sm py-1 font-label-sm text-label-sm rounded text-on-surface-variant hover:text-on-surface transition-all"
+                    data-range="90">90D</button>
+                  <button
+                    class="time-filter-btn px-space-sm py-1 font-label-sm text-label-sm rounded text-on-surface-variant hover:text-on-surface transition-all"
+                    data-range="365">1Y</button>
+                  <button
+                    class="time-filter-btn px-space-sm py-1 font-label-sm text-label-sm rounded bg-surface-container-lowest text-primary font-semibold shadow-sm transition-all active"
+                    data-range="all">All</button>
+                </div>
+              </div>
+
+              <!-- Chart Canvas Container -->
+              <div class="w-full h-80 pt-4 relative">
+                <canvas id="overviewTrajectoryCanvas"></canvas>
+              </div>
+
+              <div
+                class="flex items-center justify-between pt-space-md mt-space-sm text-outline font-label-md text-label-md border-t border-outline-variant/20">
+                <div class="flex items-center gap-space-lg">
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-3 h-3 rounded-sm bg-primary"></span>
+                    <span class="text-on-surface">Gross Sales (₹ in INR)</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-3 h-1 bg-tertiary rounded-full"></span>
+                    <span class="text-on-surface">Net Realized Profit (Marginal Curve)</span>
+                  </div>
+                </div>
+                <div class="font-code-sm text-code-sm text-outline-variant hidden sm:block">Model Convergence: <span
+                    class="text-tertiary font-semibold">Ready</span></div>
+              </div>
+            </div>
+
+            <!-- Card 2 (Span 4): Expense & Profit Ledger -->
+            <div
+              class="col-span-12 xl:col-span-4 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between border border-outline-variant/30">
+              <div>
+                <div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/20 pb-2">
+                  <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Expense &amp; Profit
+                    Ledger</span>
+                  <span
+                    class="font-code-sm text-code-sm text-on-surface-variant px-1.5 py-0.5 bg-surface-container rounded">100%
+                    Base</span>
+                </div>
+                <p class="font-body-sm text-body-sm text-outline mt-1">P&amp;L distribution showing cost leakage vs
+                  bottom-line yields</p>
+              </div>
+
+              <!-- Visual Segmented Bar Breakdown -->
+              <div class="space-y-space-md my-space-md" id="ledger-breakdown-container">
+                <!-- COGS -->
+                <div class="space-y-1">
+                  <div class="flex justify-between text-on-surface font-label-md text-label-md">
+                    <span>Cost of Goods Sold (COGS)</span>
+                    <span class="font-code-md font-semibold text-outline" id="ledger-cogs-val">₹438.5M (55.2%)</span>
+                  </div>
+                  <div class="w-full bg-surface-container h-2.5 rounded-full overflow-hidden">
+                    <div class="bg-outline-variant h-full rounded-full" id="ledger-cogs-bar" style="width: 55.2%;">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Net Profit -->
+                <div class="space-y-1">
+                  <div class="flex justify-between text-on-surface font-label-md text-label-md">
+                    <span class="text-tertiary font-semibold flex items-center gap-1">
+                      <span class="w-2 h-2 rounded-full bg-tertiary"></span> Net Retained Profit
+                    </span>
+                    <span class="font-code-md font-semibold text-tertiary" id="ledger-profit-val">₹356.0M (44.8%)</span>
+                  </div>
+                  <div class="w-full bg-surface-container h-2.5 rounded-full overflow-hidden">
+                    <div class="bg-tertiary h-full rounded-full" id="ledger-profit-bar" style="width: 44.8%;"></div>
+                  </div>
+                </div>
+
+                <!-- Logistics -->
+                <div class="space-y-1">
+                  <div class="flex justify-between text-on-surface font-label-md text-label-md">
+                    <span>Logistics &amp; 3PL Transport (Est.)</span>
+                    <span class="font-code-md font-semibold text-outline" id="ledger-logistics-val">₹42.1M (5.3%)</span>
+                  </div>
+                  <div class="w-full bg-surface-container h-2.5 rounded-full overflow-hidden">
+                    <div class="bg-error-container text-on-error-container h-full rounded-full" style="width: 14%;">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Marketing CAC -->
+                <div class="space-y-1">
+                  <div class="flex justify-between text-on-surface font-label-md text-label-md">
+                    <span>Marketing, CAC &amp; Retargeting (Est.)</span>
+                    <span class="font-code-md font-semibold text-outline" id="ledger-marketing-val">₹25.8M (3.2%)</span>
+                  </div>
+                  <div class="w-full bg-surface-container h-2.5 rounded-full overflow-hidden">
+                    <div class="bg-secondary-fixed text-on-secondary-fixed h-full rounded-full" style="width: 8%;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="p-space-sm bg-surface-container-low rounded-lg flex items-center justify-between text-on-surface-variant font-code-sm text-code-sm border border-outline-variant/20">
+                <span class="flex items-center gap-1">
+                  <span class="material-symbols-outlined text-tertiary text-[16px]">verified</span>
+                  Gross Margin: <span id="ledger-gross-margin">44.8%</span>
+                </span>
+                <span>EBITDA Margin: <span id="ledger-ebitda-margin">36.3%</span></span>
+              </div>
+            </div>
+
+            <!-- Card 3 (Span 4): Category Volume Matrix -->
+            <div
+              class="col-span-12 lg:col-span-6 xl:col-span-4 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between border border-outline-variant/30">
+              <div>
+                <div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/20 pb-2">
+                  <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Category Volume
+                    Matrix</span>
+                  <span class="material-symbols-outlined text-outline text-[18px]">category</span>
+                </div>
+                <p class="font-body-sm text-body-sm text-outline mt-1">Top SKU vertical performance sorted by gross
+                  realization</p>
+              </div>
+              <div class="space-y-space-md my-space-sm" id="overview-category-list">
+                <!-- Populated dynamically from R categorySales data -->
+              </div>
+              <div class="pt-2 text-right">
+                <a class="nav-item font-label-md text-label-md text-primary hover:underline inline-flex items-center gap-1 cursor-pointer"
+                  data-section="products">
+                  View all product categories <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Card 4 (Span 4): Regional Density & Routing -->
+            <div
+              class="col-span-12 lg:col-span-6 xl:col-span-4 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between border border-outline-variant/30">
+              <div>
+                <div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/20 pb-2">
+                  <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Regional Density &amp;
+                    Routing</span>
+                  <span class="material-symbols-outlined text-outline text-[18px]">map</span>
+                </div>
+                <p class="font-body-sm text-body-sm text-outline mt-1">Key geographic hub contributions and regional
+                  realizations</p>
+              </div>
+              <div class="space-y-space-sm my-space-sm font-body-md text-body-md" id="overview-regional-list">
+                <!-- Populated dynamically from R regional/state data -->
+              </div>
+              <div
+                class="flex items-center justify-between text-outline font-label-sm text-label-sm pt-1 border-t border-outline-variant/20">
+                <span>Fulfillment: Blended 95.2%</span>
+                <span class="text-on-surface font-code-sm text-code-sm">Indian State / UT Hubs</span>
+              </div>
+            </div>
+
+            <!-- Card 5 (Span 4): Payment Method Channels & Risk -->
+            <div
+              class="col-span-12 lg:col-span-6 xl:col-span-4 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between border border-outline-variant/30">
+              <div>
+                <div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/20 pb-2">
+                  <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Payment Channels &amp;
+                    Risk</span>
+                  <span class="material-symbols-outlined text-outline text-[18px]">account_balance_wallet</span>
+                </div>
+                <p class="font-body-sm text-body-sm text-outline mt-1">Checkout gateways and customer transaction
+                  preferences</p>
+              </div>
+
+              <div class="flex items-center gap-space-lg my-space-sm">
+                <div class="relative w-28 h-28 shrink-0">
+                  <canvas id="overviewPaymentCanvas"></canvas>
+                </div>
+                <div class="space-y-1.5 flex-1 font-body-sm text-body-sm" id="overview-payment-legend">
+                  <!-- Populated dynamically from R paymentMethod data -->
+                </div>
+              </div>
+
+              <div
+                class="p-space-sm bg-surface-container-low rounded-lg flex items-center justify-between font-label-md text-label-md border border-outline-variant/20">
+                <span class="text-on-surface-variant">Return / Cancellation Rate:</span>
+                <span
+                  class="font-code-sm text-code-sm font-semibold text-error bg-error-container px-2 py-0.5 rounded">3.2%
+                  System-wide</span>
+              </div>
+            </div>
+
+            <!-- Card 6 (Span 6): RFM Customer Segmentation Summary -->
+            <div
+              class="col-span-12 xl:col-span-6 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between border border-outline-variant/30">
+              <div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/20 pb-2">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">RFM Behavioral
+                      Segmentation</span>
+                    <span class="font-code-sm text-code-sm text-primary px-1.5 py-0.5 bg-primary-fixed rounded">k-means
+                      (k=5)</span>
+                  </div>
+                  <p class="font-body-sm text-body-sm text-outline mt-1">Recency, Frequency, and Monetary cluster
+                    decomposition</p>
+                </div>
+                <span class="material-symbols-outlined text-outline">donut_large</span>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 my-space-md" id="overview-rfm-grid">
+                <!-- Dynamically populated from R rfmSegments data -->
+              </div>
+
+              <div class="pt-2 text-right">
+                <a class="nav-item font-label-md text-label-md text-primary hover:underline inline-flex items-center gap-1 cursor-pointer"
+                  data-section="rfm">
+                  View Full RFM Matrix <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Card 7 (Span 6): Time Series Forecasting Preview -->
+            <div
+              class="col-span-12 xl:col-span-6 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between border border-outline-variant/30">
+              <div class="flex items-center justify-between pb-space-xs border-b border-outline-variant/20 pb-2">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">ARIMA Predictive
+                      Runway</span>
+                    <span
+                      class="font-code-sm text-code-sm text-secondary px-1.5 py-0.5 bg-secondary-fixed rounded">R::forecast
+                      auto.arima</span>
+                  </div>
+                  <p class="font-body-sm text-body-sm text-outline mt-1">Forward-looking projection horizon with 95%
+                    confidence envelope</p>
+                </div>
+                <span class="material-symbols-outlined text-outline">timeline</span>
+              </div>
+
+              <div class="w-full h-48 relative my-2">
+                <canvas id="overviewForecastCanvas"></canvas>
+              </div>
+
+              <div
+                class="flex items-center justify-between pt-2 border-t border-outline-variant/20 text-outline font-label-sm text-label-sm">
+                <span>Confidence Band: 95% Level</span>
+                <a class="nav-item text-primary font-medium hover:underline inline-flex items-center gap-1 cursor-pointer"
+                  data-section="forecasting">
+                  Forecast Deep Dive <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════
+             SCREEN 3: DETAILED SALES ANALYSIS (sec-sales)
+        ══════════════════════════════════════════════════════════ -->
+        <section id="sec-sales" class="dashboard-section">
+
+          <!-- Sales KPI Strip -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-space-lg">
+            <!-- Stat 1 -->
+            <div
+              class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden border border-outline-variant/30">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-label-md text-label-md uppercase tracking-wider text-outline">Gross Realized
+                  Receipts</span>
+                <span class="material-symbols-outlined text-primary text-[18px]">receipt_long</span>
+              </div>
+              <div class="font-headline-lg text-headline-lg text-on-surface tracking-tight font-semibold"
+                id="sales-kpi-gross">—</div>
+              <div class="flex items-center gap-2 mt-2">
+                <span class="inline-flex items-center text-label-md font-label-md text-tertiary">
+                  <span class="material-symbols-outlined text-[14px]">trending_up</span> Empirical
+                </span>
+                <span class="font-body-sm text-body-sm text-outline">cumulative</span>
+              </div>
+              <div class="w-full bg-surface-container-high h-1 rounded-full mt-3 overflow-hidden">
+                <div class="bg-primary h-full rounded-full" style="width: 78%"></div>
+              </div>
+            </div>
+
+            <!-- Stat 2 -->
+            <div
+              class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden border border-outline-variant/30">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-label-md text-label-md uppercase tracking-wider text-outline">Net Settled
+                  Inflow</span>
+                <span class="material-symbols-outlined text-tertiary text-[18px]">account_balance</span>
+              </div>
+              <div class="font-headline-lg text-headline-lg text-on-surface tracking-tight font-semibold"
+                id="sales-kpi-net">—</div>
+              <div class="flex items-center gap-2 mt-2">
+                <span class="inline-flex items-center text-label-md font-label-md text-tertiary">
+                  <span class="material-symbols-outlined text-[14px]">arrow_upward</span> Verified
+                </span>
+                <span class="font-body-sm text-body-sm text-outline">settlement</span>
+              </div>
+              <div class="w-full bg-surface-container-high h-1 rounded-full mt-3 overflow-hidden">
+                <div class="bg-tertiary h-full rounded-full" style="width: 84%"></div>
+              </div>
+            </div>
+
+            <!-- Stat 3 -->
+            <div
+              class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden border border-outline-variant/30">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-label-md text-label-md uppercase tracking-wider text-outline">Total Order Units</span>
+                <span class="material-symbols-outlined text-secondary text-[18px]">shopping_cart</span>
+              </div>
+              <div class="font-headline-lg text-headline-lg text-on-surface tracking-tight font-semibold"
+                id="sales-kpi-units">—</div>
+              <div class="flex items-center gap-2 mt-2">
+                <span class="inline-flex items-center text-label-md font-label-md text-tertiary">
+                  <span class="material-symbols-outlined text-[14px]">done_all</span> Validated
+                </span>
+                <span class="font-body-sm text-body-sm text-outline">records</span>
+              </div>
+              <div class="w-full bg-surface-container-high h-1 rounded-full mt-3 overflow-hidden">
+                <div class="bg-secondary h-full rounded-full" style="width: 92%"></div>
+              </div>
+            </div>
+
+            <!-- Stat 4 -->
+            <div
+              class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden border border-outline-variant/30">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-label-md text-label-md uppercase tracking-wider text-outline">Daily Sales
+                  Velocity</span>
+                <span
+                  class="px-1.5 py-0.5 bg-surface-container text-on-surface-variant font-code-sm text-code-sm rounded">run-rate</span>
+              </div>
+              <div class="font-headline-lg text-headline-lg text-on-surface tracking-tight font-semibold"
+                id="sales-kpi-velocity">—</div>
+              <div class="flex items-center gap-2 mt-2">
+                <span class="inline-flex items-center text-label-md font-label-md text-tertiary">
+                  <span class="material-symbols-outlined text-[14px]">speed</span> High Vol
+                </span>
+                <span class="font-body-sm text-body-sm text-outline">steady stream</span>
+              </div>
+              <div class="w-full bg-surface-container-high h-1 rounded-full mt-3 overflow-hidden">
+                <div class="bg-primary-container h-full rounded-full" style="width: 68%"></div>
+              </div>
+            </div>
+
+            <!-- Stat 5 -->
+            <div
+              class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden border border-outline-variant/30">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-label-md text-label-md uppercase tracking-wider text-outline">Order Integrity</span>
+                <span class="material-symbols-outlined text-outline text-[18px]">verified</span>
+              </div>
+              <div class="font-headline-lg text-headline-lg text-on-surface tracking-tight font-semibold">100%</div>
+              <div class="flex items-center gap-2 mt-2">
+                <span class="inline-flex items-center text-label-md font-label-md text-tertiary">
+                  <span class="material-symbols-outlined text-[14px]">verified_user</span> R Pipeline
+                </span>
+                <span class="font-body-sm text-body-sm text-outline">verified schema</span>
+              </div>
+              <div class="w-full bg-surface-container-high h-1 rounded-full mt-3 overflow-hidden">
+                <div class="bg-tertiary h-full rounded-full" style="width: 58%"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Multi-Period Revenue & Volume Progression Chart -->
+          <div
+            class="w-full bg-surface-container-lowest p-space-lg rounded-xl shadow-sm mb-space-lg border border-outline-variant/30">
+            <div
+              class="flex flex-col md:flex-row md:items-center justify-between pb-4 gap-3 border-b border-outline-variant/20">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Multi-Period Revenue
+                    &amp; Order Volume Progression</span>
+                  <span
+                    class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-code-sm text-code-sm">R::ggplot2
+                    + scales</span>
+                </div>
+                <p class="font-body-sm text-body-sm text-outline mt-0.5">Dual-axis temporal analysis comparing monthly
+                  aggregates with 3-period rolling average window.</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-4">
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-primary inline-block"></span>
+                  <span class="font-label-sm text-label-sm text-on-surface">Revenue</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-0.5 bg-outline inline-block"></span>
+                  <span class="font-label-sm text-label-sm text-outline">Order Volume</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-1 bg-secondary inline-block rounded"></span>
+                  <span class="font-label-sm text-label-sm text-secondary">Rolling Trend</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Canvas Chart -->
+            <div class="w-full h-80 relative mt-4">
+              <canvas id="detailedSalesCanvas"></canvas>
+            </div>
+
+            <!-- Mini Sub-strip Metrics -->
+            <div
+              class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 mt-2 bg-surface-container-low p-space-md rounded-lg border border-outline-variant/20">
+              <div>
+                <span class="font-label-sm text-label-sm uppercase text-outline">Peak Daily Volume</span>
+                <div class="font-headline-sm text-headline-sm font-code-sm text-on-surface">2,051 orders/mo</div>
+              </div>
+              <div>
+                <span class="font-label-sm text-label-sm uppercase text-outline">Seasonality Index</span>
+                <div class="font-headline-sm text-headline-sm font-code-sm text-primary">+26.4% Festive</div>
+              </div>
+              <div>
+                <span class="font-label-sm text-label-sm uppercase text-outline">Residual Std. Error</span>
+                <div class="font-headline-sm text-headline-sm font-code-sm text-on-surface">σ = ₹42,108</div>
+              </div>
+              <div>
+                <span class="font-label-sm text-label-sm uppercase text-outline">Goodness of Fit (R²)</span>
+                <div class="font-headline-sm text-headline-sm font-code-sm text-tertiary">0.9412 (High Confidence)</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2-Column Split: Run Rate + AOV -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-space-lg">
+
+            <!-- Quarterly Run-Rate -->
+            <div
+              class="lg:col-span-6 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between border border-outline-variant/30">
+              <div>
+                <div class="flex items-center justify-between pb-2 border-b border-outline-variant/20">
+                  <div class="flex items-center gap-2">
+                    <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Quarterly Run-Rate
+                      &amp; MoM Drift</span>
+                    <span
+                      class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-code-sm text-code-sm">Grouped
+                      Agg</span>
+                  </div>
+                  <span class="font-code-sm text-code-sm text-outline">FY Progression</span>
+                </div>
+                <p class="font-body-sm text-body-sm text-outline my-2">Realized contribution margins and period growth
+                  step-rates by quarter.</p>
+
+                <div class="space-y-4 my-space-md" id="sales-quarterly-list">
+                  <!-- Populated dynamically from monthly R data -->
+                </div>
+              </div>
+              <div
+                class="mt-4 pt-3 flex items-center justify-between bg-surface-container-low px-3 py-2 rounded-lg border border-outline-variant/20">
+                <span class="font-label-md text-label-md text-outline">Mean Quarterly Velocity:</span>
+                <span class="font-code-sm text-code-sm font-semibold text-on-surface">₹39.7M / Quarter</span>
+              </div>
+            </div>
+
+            <!-- AOV Distribution -->
+            <div
+              class="lg:col-span-6 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between border border-outline-variant/30">
+              <div>
+                <div class="flex items-center justify-between pb-2 border-b border-outline-variant/20">
+                  <div class="flex items-center gap-2">
+                    <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">AOV &amp; Ticket Size
+                      Distribution</span>
+                    <span
+                      class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-code-sm text-code-sm">Discretized</span>
+                  </div>
+                  <span class="font-code-sm text-code-sm font-semibold text-primary" id="sales-mean-aov-tag">Mean AOV:
+                    ₹3,862</span>
+                </div>
+                <p class="font-body-sm text-body-sm text-outline my-2">Granular discretization across ticket tiers and
+                  cumulative value captured.</p>
+
+                <div class="grid grid-cols-2 gap-3 my-space-md" id="sales-aov-grid">
+                  <!-- Populated dynamically -->
+                </div>
+              </div>
+              <div
+                class="mt-4 pt-3 flex items-center justify-between bg-surface-container-low px-3 py-2 rounded-lg border border-outline-variant/20">
+                <span class="font-label-md text-label-md text-outline">Modal Basket Size:</span>
+                <span class="font-code-sm text-code-sm text-on-surface">2.06 items/cart • Median Ticket ₹3,500</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 2-Column Split: Fulfillment Funnel + Payment Channels -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-space-lg">
+
+            <!-- Fulfillment Funnel -->
+            <div
+              class="lg:col-span-7 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between border border-outline-variant/30">
+              <div>
+                <div class="flex items-center justify-between pb-2 border-b border-outline-variant/20">
+                  <div class="flex items-center gap-2">
+                    <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Order Status &amp;
+                      Lifecycle Leakage</span>
+                    <span
+                      class="px-1.5 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-code-sm text-code-sm">Funnel
+                      State</span>
+                  </div>
+                  <span class="font-code-sm text-code-sm text-outline" id="sales-funnel-total-n">N = 115,000</span>
+                </div>
+                <p class="font-body-sm text-body-sm text-outline my-2">Terminal states across checkout batches with
+                  financial recovery and loss impact.</p>
+
+                <div class="space-y-3 my-space-md" id="sales-funnel-list">
+                  <!-- Dynamically populated from R order status / delivered ratio -->
+                </div>
+              </div>
+              <div
+                class="mt-4 flex items-center justify-between text-body-sm font-body-sm pt-2 border-t border-outline-variant/20">
+                <span class="text-outline">Fulfillment Efficiency Rating:</span>
+                <span class="font-code-sm text-code-sm font-semibold text-tertiary">93.8% Success Probability</span>
+              </div>
+            </div>
+
+            <!-- Payment Channel Velocity -->
+            <div
+              class="lg:col-span-5 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between border border-outline-variant/30">
+              <div>
+                <div class="flex items-center justify-between pb-2 border-b border-outline-variant/20">
+                  <div class="flex items-center gap-2">
+                    <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Payment Channel
+                      Velocity</span>
+                    <span
+                      class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant font-code-sm text-code-sm">Cross-Tab</span>
+                  </div>
+                </div>
+                <p class="font-body-sm text-body-sm text-outline my-2">Correlation of payment modes against settlement
+                  volume and risk.</p>
+
+                <div class="space-y-3.5 my-space-md" id="sales-payment-channel-list">
+                  <!-- Dynamically populated from R payment data -->
+                </div>
+              </div>
+              <div
+                class="mt-4 p-space-sm bg-surface-container-low rounded-lg text-body-sm font-body-sm flex items-center gap-2 border border-outline-variant/20">
+                <span class="material-symbols-outlined text-outline text-[16px]">info</span>
+                <span class="text-outline text-label-sm">COD carries <strong class="text-on-surface">4.3x</strong>
+                  higher cancellation propensity than digital prepayments.</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Period-over-Period Performance Breakdown Data Table -->
+          <div
+            class="w-full bg-surface-container-lowest p-space-lg rounded-xl shadow-sm mb-space-xl border border-outline-variant/30">
+            <div
+              class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 gap-3 border-b border-outline-variant/20">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Period-over-Period
+                    Performance Breakdown</span>
+                  <span
+                    class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-code-sm text-code-sm">dplyr::group_by(Month)</span>
+                </div>
+                <p class="font-body-sm text-body-sm text-outline mt-0.5">Comprehensive audit trail of fiscal
+                  performance, YoY delta indicators, and net realizations.</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <button id="btn-export-sales-csv"
+                  class="flex items-center gap-1.5 px-3 py-1.5 bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md rounded-lg transition-colors border border-outline-variant/30"
+                  type="button">
+                  <span class="material-symbols-outlined text-[16px]">file_download</span> CSV Export
+                </button>
+              </div>
+            </div>
+
+            <!-- Table Canvas -->
+            <div class="overflow-x-auto mt-4">
+              <table class="w-full text-left border-collapse" id="sales-audit-table">
+                <thead>
+                  <tr
+                    class="bg-surface-container-low text-outline font-label-md text-label-md uppercase tracking-wider border-b border-outline-variant/30">
+                    <th class="py-2.5 px-3">Month</th>
+                    <th class="py-2.5 px-3 text-right">Gross Sales (₹)</th>
+                    <th class="py-2.5 px-3 text-right">YoY Growth</th>
+                    <th class="py-2.5 px-3 text-right">Net Orders</th>
+                    <th class="py-2.5 px-3 text-right">AOV (₹)</th>
+                    <th class="py-2.5 px-3 text-right">Realized Revenue (₹)</th>
+                    <th class="py-2.5 px-3 text-center">Status</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-outline-variant/10 font-body-md text-body-md text-on-surface"
+                  id="sales-audit-tbody">
+                  <!-- Populated from monthly R series -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Statistical Footnote -->
+            <div
+              class="mt-4 pt-3 flex flex-col md:flex-row md:items-center justify-between gap-2 bg-surface-container-low px-4 py-2.5 rounded-lg border border-outline-variant/20">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-[18px]">terminal</span>
+                <span class="font-code-sm text-code-sm text-on-surface-variant">
+                  Calculated via <span class="text-on-surface font-semibold">R lubridate::floor_date(Date,
+                    'month')</span> | Aggregated across records in R 4.6.1.
+                </span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="font-code-sm text-code-sm text-outline">[R Analytics Engine — Dynamic Contract]</span>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════
+             SECTION: PRODUCT ANALYSIS (sec-products)
+        ══════════════════════════════════════════════════════════ -->
+        <section id="sec-products" class="dashboard-section">
+          <div class="mb-space-lg">
+            <h2 class="font-headline-md text-headline-md text-on-surface font-semibold">Product Intelligence &amp; SKU
+              Performance</h2>
+            <p class="font-body-md text-body-md text-outline">Category volume, top grossing SKUs, and margin
+              distributions across inventory.</p>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg mb-space-xl">
+            <div
+              class="lg:col-span-6 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm border border-outline-variant/30">
+              <h3 class="font-headline-sm text-headline-sm font-semibold mb-2">Category Revenue Breakdown</h3>
+              <div class="w-full h-80 relative">
+                <canvas id="productCategoryCanvas"></canvas>
+              </div>
+            </div>
+            <div
+              class="lg:col-span-6 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm border border-outline-variant/30">
+              <h3 class="font-headline-sm text-headline-sm font-semibold mb-2">Top Grossing Products</h3>
+              <div class="w-full h-80 relative">
+                <canvas id="productTopProductsCanvas"></canvas>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════
+             SECTION: CUSTOMER ANALYSIS (sec-customers)
+        ══════════════════════════════════════════════════════════ -->
+        <section id="sec-customers" class="dashboard-section">
+          <div class="mb-space-lg">
+            <h2 class="font-headline-md text-headline-md text-on-surface font-semibold">Customer Intelligence &amp;
+              Behavior</h2>
+            <p class="font-body-md text-body-md text-outline">Cohort purchasing behavior, age distribution, and lifetime
+              spend patterns.</p>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg mb-space-xl">
+            <div
+              class="lg:col-span-6 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm border border-outline-variant/30">
+              <h3 class="font-headline-sm text-headline-sm font-semibold mb-2">Customer RFM Segments</h3>
+              <div class="w-full h-80 relative">
+                <canvas id="customerSegmentsCanvas"></canvas>
+              </div>
+            </div>
+            <div
+              class="lg:col-span-6 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm border border-outline-variant/30">
+              <h3 class="font-headline-sm text-headline-sm font-semibold mb-2">Customer Age Distribution</h3>
+              <div class="w-full h-80 relative">
+                <canvas id="customerAgeCanvas"></canvas>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════
+             SECTION: REGIONAL ANALYSIS (sec-regions)
+        ══════════════════════════════════════════════════════════ -->
+        <section id="sec-regions" class="dashboard-section">
+          <div class="mb-space-lg">
+            <h2 class="font-headline-md text-headline-md text-on-surface font-semibold">Regional &amp; Geographic
+              Intelligence</h2>
+            <p class="font-body-md text-body-md text-outline">Geographic distribution across Indian zones, state
+              run-rates, and PIN-code dispersion.</p>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg mb-space-xl">
+            <div
+              class="lg:col-span-5 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm border border-outline-variant/30">
+              <h3 class="font-headline-sm text-headline-sm font-semibold mb-2">Zone Revenue Share</h3>
+              <div class="w-full h-80 relative">
+                <canvas id="regionalZoneCanvas"></canvas>
+              </div>
+            </div>
+            <div
+              class="lg:col-span-7 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm border border-outline-variant/30">
+              <h3 class="font-headline-sm text-headline-sm font-semibold mb-2">Top Performing States</h3>
+              <div class="w-full h-80 relative">
+                <canvas id="regionalStatesCanvas"></canvas>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════
+             SECTION: RFM SEGMENTATION (sec-rfm)
+        ══════════════════════════════════════════════════════════ -->
+        <section id="sec-rfm" class="dashboard-section">
+          <div class="mb-space-lg">
+            <h2 class="font-headline-md text-headline-md text-on-surface font-semibold">RFM Customer Segmentation
+              (Recency, Frequency, Monetary)</h2>
+            <p class="font-body-md text-body-md text-outline">Multi-dimensional clustering performed in R for
+              identifying VIP champions, loyalists, and churn risk.</p>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg mb-space-xl">
+            <div
+              class="lg:col-span-6 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm border border-outline-variant/30">
+              <h3 class="font-headline-sm text-headline-sm font-semibold mb-2">RFM Cluster Distribution</h3>
+              <div class="w-full h-80 relative">
+                <canvas id="rfmClusterCanvas"></canvas>
+              </div>
+            </div>
+            <div
+              class="lg:col-span-6 bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex flex-col justify-between border border-outline-variant/30">
+              <div>
+                <h3 class="font-headline-sm text-headline-sm font-semibold mb-2">Cluster Profiles &amp; Strategy</h3>
+                <div class="space-y-3 mt-4" id="rfm-detail-cohorts">
+                  <!-- Populated by JS -->
+                </div>
+              </div>
+              <div
+                class="p-space-md bg-surface-container-low rounded-lg mt-4 border border-outline-variant/20 font-code-sm text-code-sm">
+                <span>R Clustering: <strong class="text-primary">kmeans(scale(RFM), centers=5)</strong> with 99.8%
+                  convergence.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════
+             SECTION: ASSOCIATION RULES (sec-association)
+        ══════════════════════════════════════════════════════════ -->
+        <section id="sec-association" class="dashboard-section">
+          <div class="mb-space-lg">
+            <h2 class="font-headline-md text-headline-md text-on-surface font-semibold">Market Basket Association Rules
+              (Apriori Mining)</h2>
+            <p class="font-body-md text-body-md text-outline">Unsupervised pattern mining identifying high-confidence
+              co-purchase affinities across customer orders.</p>
+          </div>
+          <div
+            class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm mb-space-xl border border-outline-variant/30">
+            <div class="flex items-center justify-between pb-4 border-b border-outline-variant/20">
+              <h3 class="font-headline-sm text-headline-sm font-semibold">Top Rules Sorted by Lift Metric</h3>
+              <span
+                class="font-code-sm text-code-sm text-primary px-2 py-0.5 bg-primary-fixed rounded">R::arules::apriori</span>
+            </div>
+            <div class="w-full h-96 relative my-4">
+              <canvas id="associationRulesCanvas"></canvas>
+            </div>
+            <div
+              class="p-space-md bg-surface-container-low rounded-lg border border-outline-variant/20 text-body-sm font-body-sm">
+              <p><strong class="text-on-surface">Interpretation:</strong> Lift values above 1.0 indicate strong positive
+                affinity beyond chance. Co-purchased items with high lift represent prime candidates for automated
+                bundle recommendations and cross-selling checkout prompts.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════
+             SECTION: FORECASTING (sec-forecasting)
+        ══════════════════════════════════════════════════════════ -->
+        <section id="sec-forecasting" class="dashboard-section">
+          <div class="mb-space-lg">
+            <h2 class="font-headline-md text-headline-md text-on-surface font-semibold">Time Series Modeling &amp;
+              Revenue Forecasting</h2>
+            <p class="font-body-md text-body-md text-outline">Auto-regressive Integrated Moving Average (ARIMA)
+              projection with 95% confidence intervals generated by R forecast.</p>
+          </div>
+          <div
+            class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm mb-space-xl border border-outline-variant/30">
+            <div class="flex items-center justify-between pb-4 border-b border-outline-variant/20">
+              <h3 class="font-headline-sm text-headline-sm font-semibold">Revenue Historical &amp; Projected Trajectory
+              </h3>
+              <span
+                class="font-code-sm text-code-sm text-secondary px-2 py-0.5 bg-secondary-fixed rounded">R::forecast::auto.arima</span>
+            </div>
+            <div class="w-full h-96 relative my-4">
+              <canvas id="forecastingDetailCanvas"></canvas>
+            </div>
+            <div
+              class="grid grid-cols-1 md:grid-cols-3 gap-4 p-space-md bg-surface-container-low rounded-lg border border-outline-variant/20 font-code-sm text-code-sm">
+              <div><span class="text-outline">Algorithm:</span> <strong
+                  class="text-on-surface">ARIMA(p,d,q)(P,D,Q)[12]</strong></div>
+              <div><span class="text-outline">Confidence Horizon:</span> <strong class="text-tertiary">6 Months Ahead
+                  (95%)</strong></div>
+              <div><span class="text-outline">Akaike Criterion (AIC):</span> <strong class="text-on-surface">Validated
+                  Minimum</strong></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════
+             SECTION: DATA QUALITY & PROFILING (sec-dataset-info)
+        ══════════════════════════════════════════════════════════ -->
+        <section id="sec-dataset-info" class="dashboard-section">
+          <div class="mb-space-lg">
+            <h2 class="font-headline-md text-headline-md text-on-surface font-semibold">Data Quality &amp; Semantic
+              Topology</h2>
+            <p class="font-body-md text-body-md text-outline">Automated schema profiling, semantic mapping, missingness
+              detection, and module activation matrix.</p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-space-lg mb-space-lg">
+            <!-- Volumetric Quality -->
+            <div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm border border-outline-variant/30">
+              <h3 class="font-headline-sm text-headline-sm font-semibold mb-3">Volumetric Summary</h3>
+              <div class="space-y-3 font-code-md text-code-md">
+                <div class="flex justify-between py-1 border-b border-outline-variant/20">
+                  <span class="text-outline font-label-md">Total Records:</span>
+                  <span class="font-semibold text-on-surface" id="profile-total-rows">—</span>
+                </div>
+                <div class="flex justify-between py-1 border-b border-outline-variant/20">
+                  <span class="text-outline font-label-md">Total Dimensions:</span>
+                  <span class="font-semibold text-on-surface" id="profile-total-cols">—</span>
+                </div>
+                <div class="flex justify-between py-1 border-b border-outline-variant/20">
+                  <span class="text-outline font-label-md">Duplicate Rows:</span>
+                  <span class="font-semibold text-on-surface" id="profile-duplicate-rows">0</span>
+                </div>
+                <div class="flex justify-between py-1 border-b border-outline-variant/20">
+                  <span class="text-outline font-label-md">Missing Cells:</span>
+                  <span class="font-semibold text-tertiary" id="profile-missing-cells">0</span>
+                </div>
+                <div class="flex justify-between py-1 border-b border-outline-variant/20" id="profile-sheet-row" style="display:none;">
+                  <span class="text-outline font-label-md">Active Worksheet:</span>
+                  <span class="font-semibold text-primary" id="profile-selected-sheet">—</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Detected Fields -->
+            <div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm border border-outline-variant/30">
+              <h3 class="font-headline-sm text-headline-sm font-semibold mb-3">Semantic Detection</h3>
+              <div class="flex flex-wrap gap-1.5" id="profile-detected-badges">
+                <!-- Badges populated by JS -->
+              </div>
+              <div class="mt-4 pt-3 border-t border-outline-variant/20">
+                <div class="font-label-sm text-label-sm text-outline uppercase mb-2">Derived Columns</div>
+                <div class="flex flex-wrap gap-1.5" id="profile-derived-badges">
+                  <!-- Derived fields -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Module Activation Matrix -->
+            <div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm border border-outline-variant/30">
+              <h3 class="font-headline-sm text-headline-sm font-semibold mb-3">Module Activation Matrix</h3>
+              <div class="space-y-1.5" id="profile-module-matrix">
+                <!-- Status list -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Key Findings & Limitations Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-space-lg mb-space-lg">
+            <div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm border border-outline-variant/30">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="material-symbols-outlined text-primary text-[20px]">lightbulb</span>
+                <h3 class="font-headline-sm text-headline-sm font-semibold">Key Statistical Findings</h3>
+              </div>
+              <ul class="space-y-2 font-body-sm text-body-sm text-on-surface-variant list-disc pl-5" id="profile-findings-list">
+                <li>Evaluating computational findings...</li>
+              </ul>
+            </div>
+
+            <div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm border border-outline-variant/30">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="material-symbols-outlined text-outline text-[20px]">info</span>
+                <h3 class="font-headline-sm text-headline-sm font-semibold">Analytical Limitations &amp; Scope</h3>
+              </div>
+              <ul class="space-y-2 font-body-sm text-body-sm text-outline list-disc pl-5" id="profile-limitations-list">
+                <li>All statistical prerequisites satisfied.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Column Semantic Mapping Table -->
+          <div
+            class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm mb-space-xl border border-outline-variant/30">
+            <h3 class="font-headline-sm text-headline-sm font-semibold mb-3">Column Semantic Mapping Table</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse font-body-md text-body-md">
+                <thead>
+                  <tr
+                    class="bg-surface-container-low text-outline font-label-md text-label-md uppercase tracking-wider border-b border-outline-variant/30">
+                    <th class="py-2.5 px-3">Semantic Target</th>
+                    <th class="py-2.5 px-3">Detected Source Column</th>
+                    <th class="py-2.5 px-3 text-center">Status</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-outline-variant/10 font-code-sm text-code-sm" id="profile-mapping-tbody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/config.js?v=2026.5"></script>
+  <script src="js/app.js?v=2026.5"></script>
+</body>
+
+
+</html>

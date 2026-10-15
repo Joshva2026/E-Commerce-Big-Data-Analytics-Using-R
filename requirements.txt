@@ -1,0 +1,10 @@
+# ==============================================================================
+# requirements.txt — Python Dependencies
+# ==============================================================================
+# The Python API server (tools/local_server.py) is architected using Python's
+# native standard library (http.server, cgi, json, subprocess, shutil, mimetypes)
+# to minimize cold start latency, memory overhead, and dependency drift.
+#
+# No external pip packages are strictly required.
+# If future analytics middleware or WSGI adapters are introduced, add them below:
+# ==============================================================================
